@@ -1,10 +1,18 @@
 include $(TOPDIR)/rules.mk
 # Name and release number of this package
 PKG_NAME:=plugins
+PKG_VERSION := 1.0
 PKG_RELEASE:=1
+PKG_MAINTAINER:=Leo Hao <blueseamyheart@hotmail.com>
+
+PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/LeoHao/PPIP_LUCI_PACKAGE.git
+PKG_SOURCE_VERSION:=618201c955d7ec37633716401344b3818486e909
+
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
+PKG_LICENSE:=MIT 
+PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -12,6 +20,7 @@ define Package/plugins
 SECTION:=utils
 CATEGORY:=Utilities
 TITLE:= plugins for ppip system
+URL:=https://github.com/LeoHao
 endef
 
 define Package/plugins/description
