@@ -2,6 +2,7 @@ include $(TOPDIR)/rules.mk
 # Name and release number of this package
 PKG_NAME:=plugins
 PKG_RELEASE:=1
+PKG_SOURCE_URL:=https://github.com/LeoHao/PPIP_LUCI_PACKAGE.git
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
