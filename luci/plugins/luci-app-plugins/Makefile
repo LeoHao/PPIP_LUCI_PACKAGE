@@ -40,6 +40,7 @@ endef
 define Package/plugins/description
 #plugins is a series of customization features such as user's use of tunnel
 #networking between users website peer-to-peer speedup
+endef
 
 
 define Build/Prepare
@@ -50,6 +51,7 @@ endef
 
 define Build/Compile
 endef
+
 define Package/plugins/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua
 	mkdir -p $(1)/usr/lib/lua/plugins
