@@ -1,4 +1,18 @@
+# luci-app-plugins
+#
+#PPIP is another custom package from LuCI that tries
+#to bring a better user experience with a better
+#network configuration for LEDE/OpenWRT.
+#It adds a series of customization features such as user's use of tunnel
+#networking between users website peer-to-peer speedup. etc.
+#
+# Copyright 2020 LeoHao <blueseamyheart@hotmail.com>
+#
+
 include $(TOPDIR)/rules.mk
+
+LUCI_TITLE:=PPIP Plugins
+
 # Name and release number of this package
 PKG_NAME:=plugins
 PKG_VERSION := 1.0
@@ -9,11 +23,11 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/LeoHao/PPIP_LUCI_PACKAGE.git
 PKG_SOURCE_VERSION:=618201c955d7ec37633716401344b3818486e909
 
-
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
-PKG_LICENSE:=MIT 
+PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
+include ../../luci.mk
 include $(INCLUDE_DIR)/package.mk
 
 define Package/plugins
@@ -24,8 +38,9 @@ URL:=https://github.com/LeoHao
 endef
 
 define Package/plugins/description
-If you can't figure out what this program does, you're probably brain-dead and need immediate medical attention.
-endef
+#plugins is a series of customization features such as user's use of tunnel
+#networking between users website peer-to-peer speedup
+
 
 define Build/Prepare
 endef
@@ -41,18 +56,15 @@ define Package/plugins/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
 	cp ./log.lua $(1)/usr/lib/lua/luci/log.lua
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
-	cp ./files/controller/plugins.lua $(1)/usr/lib/lua/luci/controller/plugins.lua
+	cp ./controller/*.lua $(1)/usr/lib/lua/luci/controller/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi
 	mkdir -p $(1)/usr/lib/lua/luci/model/cbi/admin_plugins
-	cp ./files/model/special.lua $(1)/usr/lib/lua/luci/model/cbi/admin_plugins/special.lua
-	cp ./files/model/turbo.lua $(1)/usr/lib/lua/luci/model/cbi/admin_plugins/turbo.lua
-	cp ./files/model/group.lua $(1)/usr/lib/lua/luci/model/cbi/admin_plugins/group.lua
+	cp ./model/*.lua $(1)/usr/lib/lua/luci/model/cbi/admin_plugins/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/view
 	mkdir -p $(1)/usr/lib/lua/luci/view/admin_plugins
-	cp ./files/view/special.htm $(1)/usr/lib/lua/luci/view/admin_plugins/special.htm
-	cp ./files/view/turbo.htm $(1)/usr/lib/lua/luci/view/admin_plugins/turbo.htm
-	cp ./files/view/group.htm $(1)/usr/lib/lua/luci/view/admin_plugins/group.htm
+	cp ./view/*.htm $(1)/usr/lib/lua/luci/view/admin_plugins/
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_DIR) $(1)/etc/config
 endef
+
 $(eval $(call BuildPackage,plugins))
