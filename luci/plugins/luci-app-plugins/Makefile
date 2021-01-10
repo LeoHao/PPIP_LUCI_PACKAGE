@@ -28,14 +28,6 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
 include ../../luci.mk
-include $(INCLUDE_DIR)/package.mk
-
-define Package/plugins
-SECTION:=utils
-CATEGORY:=Utilities
-TITLE:= plugins for ppip system
-URL:=https://github.com/LeoHao
-endef
 
 define Package/plugins/description
 #plugins is a series of customization features such as user's use of tunnel
@@ -50,21 +42,21 @@ define Build/Configure
 endef
 
 define Build/Compile
+$(call Build/Compile/Default,clean compile)
 endef
 
 define Package/plugins/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua
-	mkdir -p $(1)/usr/lib/lua/plugins
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
 	cp ./log.lua $(1)/usr/lib/lua/luci/log.lua
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
-	cp ./controller/*.lua $(1)/usr/lib/lua/luci/controller/
+	cp ./controller/* $(1)/usr/lib/lua/luci/controller/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi
 	mkdir -p $(1)/usr/lib/lua/luci/model/cbi/admin_plugins
-	cp ./model/*.lua $(1)/usr/lib/lua/luci/model/cbi/admin_plugins/
+	cp ./model/* $(1)/usr/lib/lua/luci/model/cbi/admin_plugins/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/view
 	mkdir -p $(1)/usr/lib/lua/luci/view/admin_plugins
-	cp ./view/*.htm $(1)/usr/lib/lua/luci/view/admin_plugins/
+	cp ./view/* $(1)/usr/lib/lua/luci/view/admin_plugins/
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_DIR) $(1)/etc/config
 endef
